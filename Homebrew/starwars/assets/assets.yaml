@@ -1,0 +1,139 @@
+_id: starwars
+datasworn_version: "0.1.0"
+type: expansion
+ruleset: starforged
+<<: &Source
+  date: 2024-08-10
+  title: 'Forged with Star Wars'
+  url: https://zombiecraig.itch.io/fe-runners
+  license: https://creativecommons.org/licenses/by-nc-sa/4.0
+  authors:
+    - name: Swithin Cush
+assets:
+  path:
+    type: asset_collection
+    _source:
+      <<: *Source
+    name: Path Assets
+    color: &PathAsset.color '#3f7faa'
+    description: |-
+      __Force__ are for Force sensitive characters.
+    contents:
+      test:
+        name: Test
+        type: asset
+        <<: &PathAsset
+          category: Test
+          color: *PathAsset.color
+          _source: &AssetSource
+            <<: *Source
+            title: 'Star Wars Assets'
+        abilities:
+          - enabled: true
+            text: When you make a move by lying, bluffing, stealing or cheating +2.  On a __strong hit__ with a __match__, your deception creates an unexpected opportunity; take the value of your shadow as +momentum.
+          - enabled: false
+            text: When you [Make a Connection](datasworn:move:fe_runners/connection/make_a_connection), you may roll +shadow.  On a __strong hit__ you gain an additional connection or knowledge unbeknown to the person you connected with.
+          - enabled: false
+            text: When you make a quick escape or con your way out of a situation and burn momentum to gain a __strong hit__, take +1 momentum after you reset.  Envision how this success leaves you fated for future trouble, mark 2 ticks on your quest legacy track.
+      force_sensitive:
+        name: Force Sensitive
+        type: asset
+        <<: &PathAsset
+          category: Force
+          color: *PathAsset.color
+          _source: &AssetSource
+            <<: *Source
+            title: 'Star Wars Assets'
+        abilities:
+          - text: &ForceMove |-
+              You draw upon the Force to help you recover from injuries, gain special insight and other remarkable acts. When you rest and meditate to gather the Force, roll +spirit. On a **strong hit**, take up to +3 Force. On a **weak hit**, take +2. On a **miss**, take +2 Force but [Endure Harm](datasworn:move:starforged/suffer/endure_harm) (-2). Your max Force is +5. When you make moves aided by the Force, add +2 and suffer -1 Force.
+            enabled: true
+            moves:
+              gather_force:
+                name: Touch/Gather the Force
+                type: move
+                roll_type: action_roll
+                trigger:
+                  text: When you rest and meditate to touch and gather Force energy...
+                  conditions:
+                    - method: player_choice
+                      roll_options:
+                        - using: condition_meter
+                          condition_meter: spirit
+                text: *ForceMove
+                outcomes:
+                  strong_hit:
+                    text: |-
+                      On a __strong hit__, take up to +3 Force.
+
+                      When you make moves aided by this energy to attack or overcome obstacles, add +2 and suffer -1 Force.
+                  weak_hit:
+                    text: |-
+                      On a __weak hit__, take up to +2 Force.
+
+                      When you make moves aided by this energy to attack or overcome obstacles, add +2 and suffer -1 Force.
+                  miss:
+                    text: |-
+                      On a __miss__, take up to +2 Force but [Endure Harm](datasworn:move:starforged/suffer/endure_harm) (-2).
+
+                      When you make moves aided by this energy to attack or overcome obstacles, add +2 and suffer -1 Force.
+          - text: |-
+              When you [Endure Harm](datasworn:move:starforged/suffer/endure_harm) and score a strong hit with a match, you may instead ignore the harm and take +fire equal to the amount of harm faced (+1, +2, or +3).
+            enhance_moves:
+              - enhances:
+                  - move:starforged/suffer/endure_harm
+                roll_type: action_roll
+          - text: |-
+              When you have at least +3 Force, you may [Gain Ground](datasworn:move:starforged/combat/gain_ground) or [Strike](datasworn:move:starforged/combat/strike) by unleashing hell. If you do, take an automatic strong hit and mark progress. Then, set your fire to 0.
+            enhance_moves:
+              - enhances:
+                  - move:starforged/combat/gain_ground
+                  - move:starforged/combat/strike
+                roll_type: action_roll
+                trigger:
+                  conditions:
+                    - text: When you have at least +3 Force and unleash hell
+                      method: strong_hit
+                      roll_options: null
+        controls:
+          Force:
+            field_type: condition_meter
+            label: Force
+            max: 5
+            value: 0
+            min: 0
+      lightsaber_adept:
+        name: Lightsaber Adept
+        type: asset
+        <<: &PathAsset
+          category: Force
+          color: *PathAsset.color
+          _source: &AssetSource
+            <<: *Source
+            title: 'Star Wars Assets'
+        abilities:
+          - text: |-
+              When you [Enter the Fray](datasworn:move:starforged/combat/enter_the_fray), [Strike](datasworn:move:starforged/combat/strike), or [Clash](datasworn:move:starforged/combat/clash) using a lightsaber, you may add +1. On a strong hit, take +1 momentum as the blade hums with potential.
+            enabled: true
+            enhance_moves:
+              - enhances:
+                  - move:starforged/combat/enter_the_fray
+                  - move:starforged/combat/strike
+                  - move:starforged/combat/clash
+                roll_type: action_roll
+          - text: |-
+              When you [Face Danger](datasworn:move:starforged/adventure/face_danger) or [React Under Fire](datasworn:move:starforged/combat/react_under_fire) using precise blade work or deflection, roll +Edge instead of +Iron or +Heart. On a hit, you may redirect a ranged attack: choose one:
+
+                * An enemy’s attack hits a nearby object or foe.
+                * You gain initiative, even on a weak hit.
+          - text: |-
+              When you Turn the Tide with a lightsaber, mark +2 momentum instead of +1. If you are fighting with control and calm, you may also Endure Stress (roll Spirit) to gain +1 health.
+          - text: |-
+              When you Strike with the Force guiding your hand, you may roll +Wits or +Spirit instead of +Iron. On a strong hit, mark progress twice, but you must Sacrifice Resources (focus, energy, or risk detection).
+          
+
+
+
+
+
+

@@ -1,0 +1,80 @@
+_id: starwars
+datasworn_version: "0.1.0"
+type: expansion
+ruleset: starforged
+<<: &Source
+  date: 2024-08-10
+  title: 'Forged in a Galaxy'
+  url: https://<tba>
+  license: https://creativecommons.org/licenses/by-nc-sa/4.0
+  authors:
+    - name: Swithin Cush
+moves:
+  adventure:
+    name: Adventure Moves
+    type: move_category
+    color: &adventure.color '#206087'
+    _source:
+      <<: *Source
+      page: 146
+    summary: |-
+      The __adventure moves__ encompass broadly useful actions to overcome obstacles, reinforce your position, conduct investigations, influence others, and support your fellow protagonists.
+    description: |-
+      The __adventure moves__ encompass broadly useful actions to overcome obstacles, reinforce your position, conduct investigations, influence others, and support your fellow protagonists. When you face a peril or try to gain leverage, and another move does not apply, you'll likely find your answer among these moves.
+    contents: 
+      face_danger:
+        name: Face Danger
+        roll_type: action_roll
+        type: move
+        trigger:
+          text: When you attempt something risky or react to an imminent threat...
+          conditions:
+            - method: player_choice
+              text: With speed, mobility, or agility
+              roll_options:
+                - using: stat
+                  stat: edge
+            - method: player_choice
+              text: With resolve, command, or sociability
+              roll_options:
+                - using: stat
+                  stat: heart
+            - method: player_choice
+              text: With strength, endurance, or aggression
+              roll_options:
+                - using: stat
+                  stat: iron
+            - method: player_choice
+              text: With deception, stealth, or trickery
+              roll_options:
+                - using: stat
+                  stat: shadow
+            - method: player_choice
+              text: With expertise, focus, or observation
+              roll_options:
+                - using: stat
+                  stat: wits
+        text: |-
+          __When you attempt something risky or react to an imminent threat__, envision your action and roll. If you act...
+
+            * With speed, mobility, or agility: Roll +edge
+            * With resolve, command, or sociability: Roll +heart
+            * With strength, endurance, or aggression: Roll +iron
+            * With deception, stealth, or trickery: Roll +shadow
+            * With expertise, focus, or observation: Roll +wits
+
+          On a __strong hit__, you are successful. Take +1 momentum.
+
+          On a __weak hit__, you succeed, but not without a cost. Make a suffer move (-1).
+
+          On a __miss__, you fail, or a momentary success is undermined by a dire turn of events. [Pay the Price](datasworn:move:fe_runners/fate/pay_the_price).
+        outcomes:
+          strong_hit:
+            text: On a __strong hit__, you are successful. Take +1 momentum.
+          weak_hit:
+            text: On a __weak hit__, you succeed, but not without a cost. Make a suffer move (-1).
+          miss:
+            text: On a __miss__, you fail, or a momentary success is undermined by a dire turn of events. [Pay the Price](datasworn:move:fe_runners/fate/pay_the_price).
+        _source:
+          <<: *Source
+          page: 126
