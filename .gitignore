@@ -2,6 +2,11 @@
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/
+.trash/
+
+# Iron Vault & Gameplay related files
+Scripts/
+Campaigns/
 
 # Exclude specific plugin-related cache or data files that are large or device-specific
 # Example for Smart Connections plugin:
