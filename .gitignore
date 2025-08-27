@@ -1,0 +1,12 @@
+# Exclude Obsidian's workspace cache files (which store open notes, pane layout, etc.)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/
+
+# Exclude specific plugin-related cache or data files that are large or device-specific
+# Example for Smart Connections plugin:
+.smart-connections/
+
+# Exclude system-generated files that are not part of the vault content
+.DS_Store # macOS
+Thumbs.db # Windows

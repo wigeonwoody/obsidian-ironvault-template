@@ -1,0 +1,2 @@
+# Obsidian-IronVault-template
+ 
