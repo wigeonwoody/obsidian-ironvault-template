@@ -7,6 +7,8 @@
 # Iron Vault & Gameplay related files
 Scripts/
 Campaigns/
+Sessions/
+Daily notes/
 
 # Exclude specific plugin-related cache or data files that are large or device-specific
 # Example for Smart Connections plugin:
